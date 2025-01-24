@@ -16,11 +16,11 @@ def home():
 def about():
     return 'About'
 
-@app.route('/api/users', methods=["GET"])
+@app.route('/api/usuarios', methods=["GET"])
 def get_users():
     return jsonify(users)
 
-@app.route('/api/users', methods=["POST"])
+@app.route('/api/usuarios', methods=["POST"])
 def add_user():
     new_user = request.get_json()
     users.append(new_user)
