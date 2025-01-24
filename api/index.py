@@ -26,4 +26,3 @@ def add_user():
     users.append(new_user)
     return jsonify (new_user),201
 
-app.run()
