@@ -9,9 +9,9 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # Cargar las variables del archivo .env
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
-load_dotenv(dotenv_path)
-
+#dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+#load_dotenv(dotenv_path)
+load_dotenv()
 # Obtener la URI de MongoDB desde las variables de entorno
 MONGO_URI = os.getenv("MONGO_URI")
 if not MONGO_URI:
