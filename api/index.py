@@ -4,9 +4,13 @@ from bson import ObjectId
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
+from flask_cors import CORS
 
 # Inicializar la aplicación Flask
 app = Flask(__name__)
+
+# Configurar CORS
+CORS(app, resources={r"/api/*": {"origins": "https://vercel-flask-front.vercel.app"}})  # Permitir solo tu dominio frontend
 
 # Cargar las variables del archivo .env
 #dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
