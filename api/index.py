@@ -61,11 +61,6 @@ def get_users():
 @app.route('/api/crearusuario', methods=["POST"])
 def add_user():
     new_user = request.get_json()  # Obtener los datos del cuerpo de la solicitud
-
-    # Validación simple de los datos
-    if not new_user.get("nombre") or not new_user.get("email"):
-        return jsonify({"error": "El nombre y el email son requeridos"}), 400
-
     user_id = usuarios_collection.insert_one(new_user).inserted_id  # Insertar el nuevo usuario
     new_user["_id"] = str(user_id)  # Convertir el ObjectId a string
     return jsonify(new_user), 201  # Retornar el usuario con su nuevo ID
