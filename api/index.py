@@ -58,12 +58,17 @@ def get_users():
     return jsonify(user_list)
 
 # Crear un nuevo usuario
-@app.route('/api/usuarios', methods=["POST"])
+@app.route('/api/crearusuario', methods=["POST"])
 def add_user():
-    new_user = request.get_json()
-    user_id = usuarios_collection.insert_one(new_user).inserted_id  # Usar la colección "usuarios"
-    new_user["_id"] = str(user_id)  # Convertir ObjectId a string
-    return jsonify(new_user), 201
+    new_user = request.get_json()  # Obtener los datos del cuerpo de la solicitud
+
+    # Validación simple de los datos
+    if not new_user.get("nombre") or not new_user.get("email"):
+        return jsonify({"error": "El nombre y el email son requeridos"}), 400
+
+    user_id = usuarios_collection.insert_one(new_user).inserted_id  # Insertar el nuevo usuario
+    new_user["_id"] = str(user_id)  # Convertir el ObjectId a string
+    return jsonify(new_user), 201  # Retornar el usuario con su nuevo ID
 
 # Obtener un usuario por su ID
 @app.route('/api/usuarios/<string:user_id>', methods=["GET"])
